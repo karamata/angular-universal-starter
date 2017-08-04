@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TransferState } from '../modules/transfer-state/transfer-state';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
+import { Store } from '@ngrx/store';
+import * as actions from './actions';
 
 @Component({
   selector: 'demo-app',
@@ -17,10 +18,14 @@ import { REQUEST } from '@nguniversal/express-engine/tokens';
   ]
 })
 export class AppComponent implements OnInit {
-  constructor(private cache: TransferState) { }
+  constructor(
+    private store: Store<any>) {
+      console.log('fuck all');
+      store.dispatch(new actions.LoadHomeAction({
+        message: 'Load from Home'
+      }));
+  }
 
   ngOnInit() {
-    // This is an example
-    this.cache.set('message', 'Hello World');
   }
 }

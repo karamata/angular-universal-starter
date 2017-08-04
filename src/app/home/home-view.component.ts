@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { TransferState } from '../../modules/transfer-state/transfer-state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'home-view',
-  template: `<h3>{{ message }}</h3>`
+  template: `<h3>message from home : {{ message }}</h3>`
 })
-export class HomeView implements OnInit {
+export class HomeView {
   public message: string;
 
-  constructor(private transferState: TransferState) {}
-
-  ngOnInit() {
-    this.message = this.transferState.get('message');
+  constructor(private store: Store<any>) {
+    this.message = String(store.source.getValue().data.message);
   }
 }
